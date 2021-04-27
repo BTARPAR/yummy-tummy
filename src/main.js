@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from "vue-router"
 import Vuex from 'vuex'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faShoppingBasket, faUtensils, faDollarSign, faCamera} from '@fortawesome/free-solid-svg-icons'
+import {faShoppingBasket, faUtensils, faDollarSign, faCamera, faTimes} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import App from './App.vue'
 import Login from "@/components/Login";
@@ -10,12 +10,14 @@ import SignUp from "@/components/SignUp";
 import Dashboard from "@/components/Dashboard";
 import UpdateOrder from "@/components/UpdateOrder";
 import './styles/main.scss'
+import PlaceOrder from "@/components/PlaceOrder";
 
 library.add({
     faShoppingBasket,
     faUtensils,
     faDollarSign,
-    faCamera
+    faCamera,
+    faTimes
 })
 
 Vue.use(VueRouter)
@@ -29,7 +31,6 @@ const store = new Vuex.Store({
     },
     mutations: {
         loggedIn (state) {
-            console.log('hiiiiiiiiiiiii')
             state.count++
         }
     }
@@ -39,6 +40,7 @@ const routes = [
     {path: '/', component: Login, name: 'Login'},
     {path: '/signup', component: SignUp, name: 'Sign Up'},
     {path: '/dashboard', component: Dashboard, name: 'Dashboard'},
+    {path: '/delivery', component: PlaceOrder, name: 'Place Order'},
     {path: '/:id', component: UpdateOrder, name: 'UpdateOrder',}
 ]
 const router = new VueRouter({

@@ -18,6 +18,10 @@
           <span></span>
         </div>
       </div>
+      <div class="pa4 tl br3">
+        <span class="courier tc f4 fw9">Order No.</span>
+        <p class="f3 ma0 tc">#{{ orderNo }}</p>
+      </div>
       <div class="ba pa4 tl br3">
         <span class="courier f4 fw9">Customer Details</span>
         <div class="flex flex-column tl mt2">
@@ -40,7 +44,6 @@
     <Table
         v-bind:table-data="users"
         type="detail"
-        v-bind:header-data="headers"
     />
   </div>
 </template>
@@ -57,7 +60,7 @@ export default {
   data: function () {
     return {
       users: {},
-      headers: ['quantity', 'item', 'price', 'foodType', 'total'],
+      orderNo: '',
       restaurantDetail: {
         address: {
           street: '3186 S Barrington Ave',
@@ -111,6 +114,7 @@ export default {
           this.users = await res.json()
           this.customerDetails = this.users.customer_info
           this.restaurantDetail = this.users.restaurant_info
+          this.orderNo = this.users.order_no
           break
       }
     }

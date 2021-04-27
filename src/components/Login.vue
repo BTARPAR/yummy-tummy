@@ -4,7 +4,7 @@
       <form class="measure center" @submit.prevent="login">
         <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
           <legend class="f4 fw6 ph0 mh0">Sign In</legend>
-          <p class="lh-title ma4 cursive">Good Food for Good Moments</p>
+          <p class="lh-title ma4 cursive f3">Good Food for Good Moments</p>
           <div class="mt3">
             <label class="db fw6 lh-copy f6 tl" for="email-address">Email</label>
             <input class="pa2 input-reset ba  w-100"
@@ -19,7 +19,7 @@
           </div>
         </fieldset>
         <div class="">
-          <input class="b br2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit"
+          <input class="b br2 ph3 pv3 input-reset ba b--none bg-moon-gray grow pointer f6 dib w-100" type="submit"
                  value="Sign in">
         </div>
 
@@ -63,7 +63,6 @@ export default {
       if (res.status === 201) {
         await this.$router.push('/dashboard')
       }
-
     }
   }
 }

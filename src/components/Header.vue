@@ -1,10 +1,17 @@
 <template>
   <header id="header" class="courier f3 lh-title pv4">
-    <img src="../assets/logo.png" width="100">
+    <img src="../assets/logo.png" width="100" @click="home" class="pointer">
     <div> Yummy - Tummy</div>
 
-    <div v-if="loggedIn" @click="logOut">Log Out</div>
-    <div v-else></div>
+    <div v-if="loggedIn">
+      <button @click="logOut" class="f5 grow b--none no-underline br3 ph4 pv2 mr4 white bg-black-50 pointer">Log Out
+      </button>
+    </div>
+    <div v-else>
+      <button @click="placeOrder" class="f5 grow b--none no-underline br3 ph4 pv2 mr4 white bg-black-50 pointer">
+        Place Order
+      </button>
+    </div>
   </header>
 </template>
 
@@ -16,12 +23,17 @@ export default {
   components: {},
   data() {
     return {
-      'loggedIn': this.$route.path !== '/' && this.$route.path !== '/signup'
+      loggedIn: this.$route.path !== '/' && this.$route.path !== '/signup' && this.$route.path !== '/delivery'
     }
   },
   methods: {
+    home() {
+      this.$router.push('/dashboard')
+    },
+    placeOrder() {
+      this.$router.push('/delivery')
+    },
     setLoggedIn() {
-      console.log(this.$route)
       this.loggedIn = this.$route.path !== '/' && this.$route.path !== '/signup'
     },
     async logOut() {
@@ -32,7 +44,6 @@ export default {
       };
 
       await fetch(`http://localhost:4000/logOut`, requestOptions);
-      console.log(this.$router)
       this.$router.push('/')
 
     }

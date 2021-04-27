@@ -13,7 +13,7 @@
 
           <div class="flex flex-column justify-center w-50-m w-60">
             <h4 class="f3">8,282</h4>
-            <div class="f3">New Users</div>
+            <div class="f3">Total Users</div>
           </div>
         </div>
       </div>
@@ -57,7 +57,6 @@ export default {
     Table
   },
   created() {
-    console.log('got executed')
     this.getOrders();
   },
   data: function () {

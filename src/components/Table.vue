@@ -14,7 +14,7 @@
         'bg-light-blue': edit,
       }">
         <span v-if="!edit">Edit</span>
-        <span v-else>Done</span>
+        <span v-else>Update</span>
       </button>
     </div>
 
@@ -140,6 +140,11 @@
           </div>
         </td>
 
+        <td class="tc grow-large" v-if="edit" @click="remove(index)">
+        <span class="hover-bg-dark-red link br-100 shadow-5 ph1 pv1 bg-light-red pointer">
+          <font-awesome-icon icon="times" class="tc white ph1 pv1 relative" style="top: 5px"/>
+        </span>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -158,29 +163,24 @@ export default {
     }
   },
   props: ['tableData', 'type'],
-  created() {
-    console.log({tableData: this.tableData})
-  },
   methods: {
     updateOrder(id) {
       this.$router.push(`/${id}`)
     },
+    remove(index){
+        this.tableData.selected_items.splice(index, 1)
+    },
     update() {
       if (this.edit) {
-        this.edit = !this.edit
-
         this.updateApi()
-        console.log('hi')
       }
       this.edit = !this.edit
-
     },
     async updateApi() {
-      console.log(this.edit)
       const requestOptions = {
         method: 'POST',
         body: JSON.stringify(this.tableData),
-        headers:{
+        headers: {
           'content-type': 'application/json'
         },
         credentials: 'include'
@@ -189,7 +189,7 @@ export default {
       const id = this.$route.params.id
 
       await fetch(`http://localhost:4000/getOrder?id=${id}`, requestOptions);
-      this.$router.push('/dashboard')
+
     }
   }
 }
