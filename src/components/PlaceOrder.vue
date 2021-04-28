@@ -169,7 +169,7 @@ export default {
           'content-type': 'application/json'
         },
       };
-      const res = await fetch('http://localhost:4000/placeOrder', requestOptions);
+      const res = await fetch(`${process.env.API_KEY}/placeOrder`, requestOptions);
       if (res.status === 201) {
         await this.$router.push('/login')
       }

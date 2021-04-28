@@ -57,7 +57,7 @@ export default {
 
       const id = this.$route.params.id
 
-      const res = await fetch(`http://localhost:4000/getOrder?id=${id}`, requestOptions);
+      const res = await fetch(`${process.env.API_KEY}/getOrder?id=${id}`, requestOptions);
 
       switch (res.status) {
         case 401:

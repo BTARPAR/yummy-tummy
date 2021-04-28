@@ -58,7 +58,7 @@ export default {
       if (!value) {
         await this.getOrders()
       } else {
-        const res = await fetch(`http://localhost:4000/search?id=${value}`, requestOptions);
+        const res = await fetch(`${process.env.API_KEY}/search?id=${value}`, requestOptions);
 
         switch (res.status) {
           case 401:
@@ -76,7 +76,7 @@ export default {
         credentials: 'include'
       };
 
-      const res = await fetch('http://localhost:4000/getOrders', requestOptions);
+      const res = await fetch(`${process.env.API_KEY}`, requestOptions);
 
       switch (res.status) {
         case 401:
@@ -93,7 +93,7 @@ export default {
         credentials: 'include'
       };
 
-      const res = await fetch('http://localhost:4000/statistics', requestOptions);
+      const res = await fetch(`${process.env.API_KEY}`, requestOptions);
 
       switch (res.status) {
         case 401:

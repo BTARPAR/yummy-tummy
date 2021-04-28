@@ -48,8 +48,8 @@ export default {
     return {
       email: 'test@test.com',
       password: 'BHARGAV9228393389',
-      firstname: '',
-      lastname: ''
+      firstname: 'SUNIL',
+      lastname: 'PANCHAL'
     }
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
         body: urlencoded,
         credentials: 'include'
       };
-      const res = await fetch('http://localhost:4000/signup', requestOptions);
+      const res = await fetch(`${process.env.API_KEY}/signup`, requestOptions);
       if (res.status === 201) {
         await this.$router.push('/')
       }

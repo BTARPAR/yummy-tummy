@@ -187,7 +187,7 @@ export default {
 
       const id = this.$route.params.id
 
-      await fetch(`http://localhost:4000/getOrder?id=${id}`, requestOptions);
+      await fetch(`${process.env.API_KEY}/getOrder?id=${id}`, requestOptions);
 
     }
   }

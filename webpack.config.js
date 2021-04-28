@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
     module: {
         rules: [
@@ -23,4 +25,7 @@ module.exports = {
         ]
     },
     // plugin omitted
+    plugins: [
+        new webpack.DefinePlugin({API_KEY: JSON.stringify(process.env.API_KEY || 'http://localhost:4000')})
+    ]
 }
