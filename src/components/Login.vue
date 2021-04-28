@@ -59,7 +59,7 @@ export default {
         body: urlencoded,
         credentials: 'include'
       };
-      const res = await fetch(`${process.env.URL}/login`, requestOptions);
+      const res = await fetch(`https://fast-badlands-89964.herokuapp.com/login`, requestOptions);
       if (res.status === 201) {
         await this.$router.push('/dashboard')
       }
