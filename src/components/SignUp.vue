@@ -65,7 +65,7 @@ export default {
         body: urlencoded,
         credentials: 'include'
       };
-      const res = await fetch(`${process.env.API_KEY}/signup`, requestOptions);
+      const res = await fetch(`${process.env.URL}/signup`, requestOptions);
       if (res.status === 201) {
         await this.$router.push('/')
       }

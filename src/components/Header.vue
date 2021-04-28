@@ -51,7 +51,7 @@ export default {
         credentials: 'include'
       };
 
-      await fetch(`${process.env.API_KEY}/logOut`, requestOptions);
+      await fetch(`${process.env.URL}/logOut`, requestOptions);
       this.$router.push('/')
 
     }

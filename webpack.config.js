@@ -26,6 +26,8 @@ module.exports = {
     },
     // plugin omitted
     plugins: [
-        new webpack.DefinePlugin({API_KEY: JSON.stringify(process.env.API_KEY || 'http://localhost:4000')})
+        new webpack.DefinePlugin({
+            'process.env': {URL: JSON.stringify(process.env.API_KEY || 'http://localhost:4000')}
+        })
     ]
 }
