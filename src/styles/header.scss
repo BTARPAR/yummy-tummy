@@ -1,13 +1,14 @@
+@import "variables";
 #header {
   display: flex;
   align-items: center;
   height: 4rem;
   justify-content: space-between;
   background-color: white;
-  border: 1px solid #c2c2c2;
+  border: 1px solid $silver;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  box-shadow: 0 4px 2px -2px #adadad;
+  box-shadow: 0 4px 2px -2px $silver-chalice;
   position: sticky;
   top: 0;
   z-index: 1;

@@ -28,13 +28,13 @@
         </div>
       </div>
       <div class="mt3 flex justify-between">
-        <div class="w-70">
+        <div class="w-50">
           <label class="db fw6 lh-copy f6 tl" for="city">City</label>
           <input class="b pa2 input-reset ba  w-100"
                  type="text" name="city"
                  id="city" v-model="city">
         </div>
-        <div class="w-20">
+        <div class="w-10">
           <label class="db fw6 lh-copy f6 tl" for="state">State</label>
           <input class="b pa2 input-reset ba tc w-100"
                  type="text" name="state"
@@ -123,7 +123,6 @@ export default {
   },
   methods: {
     selected(place) {
-      console.log({place})
       this.selectedPlace = place
     },
     checkError() {

@@ -152,7 +152,6 @@
 </template>
 
 <script>
-import '../styles/updateOrder.scss'
 
 export default {
   name: 'Table',

@@ -5,43 +5,15 @@
       <input type="text" class="ml5 w-20 pa2" v-model="search" @keyup="find" placeholder="Search by order number"/>
     </div>
     <div class="flex flex-wrap justify-around">
-      <div class="br3 pa2 mr2-l ml2-l mb4 w-60-m w-30-ns bg-white grow">
-        <div class="flex items-center tc">
-          <div class="w4 w3-s ml4 ml-s pa4 bg-lightest-blue br-100 pa-3-s">
-            <font-awesome-icon icon="shopping-basket" size="3x" class="tc white icon-s"/>
-          </div>
-
-          <div class="flex flex-column justify-center w-50-m w-60">
-            <h4 class="f3">8,282</h4>
-            <div class="f3">Total Users</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="br3 pa2 mr2-l ml2-l mb4 w-60-m w-30-ns bg-white grow">
-        <div class="flex items-center tc">
-          <div class="w4 w3-s pa-3-s ml4 ml-s pa4 bg-lightest-blue br-100">
-            <font-awesome-icon icon="utensils" size="3x" class="tc white icon-s"/>
-          </div>
-
-          <div class="flex flex-column justify-center w-50-m w-60">
-            <h4 class="f3">200,521</h4>
-            <div class="f3">Total Orders</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="br3 pa2 mr2-l ml2-l mb4 w-60-m w-30-ns bg-white grow">
-        <div class="flex items-center tc">
-          <div class="w4 w3-s pa-3-s ml4 ml-s pa4 bg-lightest-blue br-100">
-            <font-awesome-icon icon="dollar-sign" size="3x" class="tc white icon-s"/>
-          </div>
-          <div class="flex flex-column justify-center w-50-m w-60">
-            <h4 class="f3">215,542</h4>
-            <div class="f3">Available Products</div>
-          </div>
-        </div>
-      </div>
+      <Statistics label="Total Users"
+                  icon="shopping-basket"
+                  v-bind:count="statistics.users"/>
+      <Statistics label="Total Orders"
+                  icon="utensils"
+                  v-bind:count="statistics.orders"/>
+      <Statistics label="Revenue"
+                  icon="dollar-sign"
+                  v-bind:count="statistics.revenue"/>
     </div>
     <Table v-bind:table-data="users"/>
   </div>
@@ -50,25 +22,29 @@
 <script>
 import debounce from 'debounce';
 import Table from "@/components/Table";
+import Statistics from "@/components/common/Statistics";
 
 export default {
   name: 'Dashboard',
   components: {
-    Table
+    Table,
+    Statistics
   },
   created() {
     this.getOrders();
+    this.getStatistics()
   },
   data: function () {
     return {
       users: [],
-      search: ''
+      search: '',
+      statistics: {}
     }
   },
   methods: {
     debouceCallback: debounce(function (value) {
       this.findOrder(value)
-    }, 2000),
+    }, 1000),
     async find() {
       const value = Number(this.search)
       this.debouceCallback(value)
@@ -79,15 +55,19 @@ export default {
         credentials: 'include'
       };
 
-      const res = await fetch(`http://localhost:4000/search?id=${value}`, requestOptions);
+      if (!value) {
+        await this.getOrders()
+      } else {
+        const res = await fetch(`http://localhost:4000/search?id=${value}`, requestOptions);
 
-      switch (res.status) {
-        case 401:
-          await this.$router.push('/')
-          break
-        case 200:
-          this.users = await res.json()
-          break
+        switch (res.status) {
+          case 401:
+            await this.$router.push('/')
+            break
+          case 200:
+            this.users = await res.json()
+            break
+        }
       }
     },
     async getOrders() {
@@ -104,6 +84,23 @@ export default {
           break
         case 200:
           this.users = await res.json()
+          break
+      }
+    },
+    async getStatistics() {
+      const requestOptions = {
+        method: 'GET',
+        credentials: 'include'
+      };
+
+      const res = await fetch('http://localhost:4000/statistics', requestOptions);
+
+      switch (res.status) {
+        case 401:
+          await this.$router.push('/')
+          break
+        case 200:
+          this.statistics = await res.json()
           break
       }
     },

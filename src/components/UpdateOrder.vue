@@ -1,44 +1,20 @@
 <template>
   <div class="flex-column justify-around lh-copy">
     <div class="flex justify-around">
-      <div class="ba pa4 tl br3">
-        <span class="courier f4 fw9">Restaurant Details</span>
-        <div class="flex flex-column tl mt2">
-          <span>{{ restaurantDetail.name }}</span>
-          <div>
-            <span>{{ restaurantDetail.address.street }}, </span>
-            <span>{{ restaurantDetail.address.city }}</span>
-          </div>
-          <div>
-            <span>{{ restaurantDetail.address.state }} - </span>
-            <span>{{ restaurantDetail.address.zipCode }}</span>
-          </div>
+      <InformationBoard
+          v-bind:detail-object="restaurantDetail"
+          title="Customer Details"
+      />
 
-          <span>{{ restaurantDetail.phone_number }}</span>
-          <span></span>
-        </div>
-      </div>
       <div class="pa4 tl br3">
         <span class="courier tc f4 fw9">Order No.</span>
         <p class="f3 ma0 tc">#{{ orderNo }}</p>
       </div>
-      <div class="ba pa4 tl br3">
-        <span class="courier f4 fw9">Customer Details</span>
-        <div class="flex flex-column tl mt2">
-          <span>{{ customerDetails.name }}</span>
-          <div>
-            <span>{{ customerDetails.address.street }}, </span>
-            <span>{{ customerDetails.address.city }}</span>
-          </div>
-          <div>
-            <span>{{ customerDetails.address.state }} - </span>
-            <span>{{ customerDetails.address.zipCode }}</span>
-          </div>
 
-          <span>{{ restaurantDetail.phone_number }}</span>
-          <span></span>
-        </div>
-      </div>
+      <InformationBoard
+          v-bind:detail-object="customerDetails"
+          title="Customer Details"
+      />
     </div>
 
     <Table
@@ -50,43 +26,20 @@
 
 <script>
 import Table from "@/components/Table";
-import '../styles/updateOrder.scss'
+import InformationBoard from "@/components/common/InformationBoard";
 
 export default {
   name: 'UpdateOrder',
   components: {
-    Table
+    Table,
+    InformationBoard
   },
   data: function () {
     return {
       users: {},
       orderNo: '',
-      restaurantDetail: {
-        address: {
-          street: '3186 S Barrington Ave',
-          zipCode: '90066',
-          city: 'Los Angeles',
-          state: 'CA',
-          country: 'USA',
-        },
-        name: 'Panda Express',
-        contactInfo: {
-          phone_number: 'xxx-xxx-xxxx'
-        }
-      },
-      customerDetails: {
-        address: {
-          street: '3186 S Barrington Ave',
-          apartment: '#D',
-          zipCode: '90066',
-          state: 'CA',
-          country: 'USA',
-        },
-        name: 'Sunil Panchal',
-        contactInfo: {
-          phone_number: 'xxx-xxx-xxxx'
-        }
-      }
+      restaurantDetail: {},
+      customerDetails: {}
     }
   },
   watch: {
