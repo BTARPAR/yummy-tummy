@@ -38,12 +38,16 @@ import '../styles/login.scss'
 export default {
   name: 'Login',
   components: {},
-  props:['signUp'],
+  props: ['signUp'],
   data() {
     return {
       email: 'test@test.com',
       password: 'BHARGAV9228393389',
     };
+  },
+  created() {
+    console.log({API_KEY: process.env.API_KEY})
+    console.log({URL: process.env.URL})
   },
   methods: {
     changePath() {

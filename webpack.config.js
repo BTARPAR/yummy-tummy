@@ -24,10 +24,4 @@ module.exports = {
             }
         ]
     },
-    // plugin omitted
-    plugins: [
-        new webpack.DefinePlugin({
-            URL: JSON.stringify('https://fast-badlands-89964.herokuapp.com')
-        })
-    ]
 }
