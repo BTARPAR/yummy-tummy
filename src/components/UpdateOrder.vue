@@ -18,7 +18,7 @@
     </div>
 
     <Table
-        v-bind:table-data="users"
+        v-bind:table-data="items"
         type="detail"
     />
   </div>
@@ -36,7 +36,7 @@ export default {
   },
   data: function () {
     return {
-      users: {},
+      items: {},
       orderNo: '',
       restaurantDetail: {},
       customerDetails: {}
@@ -64,10 +64,10 @@ export default {
           await this.$router.push('/')
           break
         case 200:
-          this.users = await res.json()
-          this.customerDetails = this.users.customer_info
-          this.restaurantDetail = this.users.restaurant_info
-          this.orderNo = this.users.order_no
+          this.items = await res.json()
+          this.customerDetails = this.items.customer_info
+          this.restaurantDetail = this.items.restaurant_info
+          this.orderNo = this.items.order_no
           break
       }
     }

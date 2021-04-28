@@ -15,7 +15,7 @@
                   icon="dollar-sign"
                   v-bind:count="statistics.revenue"/>
     </div>
-    <Table v-bind:table-data="users"/>
+    <Table v-bind:table-data="orders"/>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
   },
   data: function () {
     return {
-      users: [],
+      orders: [],
       search: '',
       statistics: {}
     }
@@ -65,7 +65,7 @@ export default {
             await this.$router.push('/')
             break
           case 200:
-            this.users = await res.json()
+            this.orders = await res.json()
             break
         }
       }
@@ -83,7 +83,7 @@ export default {
           await this.$router.push('/')
           break
         case 200:
-          this.users = await res.json()
+          this.orders = await res.json()
           break
       }
     },
