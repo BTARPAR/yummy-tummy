@@ -41,13 +41,9 @@ export default {
   props: ['signUp'],
   data() {
     return {
-      email: 'test@test.com',
-      password: 'BHARGAV9228393389',
+      email: '',
+      password: '',
     };
-  },
-  created() {
-    console.log({API_KEY: process.env.API_KEY})
-    console.log({URL: process.env.URL})
   },
   methods: {
     changePath() {
@@ -63,7 +59,7 @@ export default {
         body: urlencoded,
         credentials: 'include'
       };
-      const res = await fetch(`https://fast-badlands-89964.herokuapp.com/login`, requestOptions);
+      const res = await fetch(`${process.env.URL}/login`, requestOptions);
       if (res.status === 201) {
         await this.$router.push('/dashboard')
       }

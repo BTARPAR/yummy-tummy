@@ -9,7 +9,7 @@ module.exports = {
 
         config
             .plugin("define").tap((args) => {
-            let _base = args[0]["process.env"];
+            const _base = args[0]["process.env"];
             args[0]["process.env"] = {
                 ..._base,
                 "URL": JSON.stringify(process.env.API_KEY || 'http://localhost:4000'),

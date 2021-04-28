@@ -107,21 +107,34 @@ export default {
   components: {},
   data() {
     return {
-      firstname: 'Bhargav',
-      lastname: 'Tarpara',
-      street: '3186',
-      city: 'Los Angeles',
-      state: 'CA',
-      phonenumber: '6264645601',
-      zip: '90066',
-      restaurantList: [{name: 'Taco Bell', _id: 1}, {name: 'Indian Spice', _id: 2}],
-      person: '3',
-      selectedPlace: '1',
+      firstname: '',
+      lastname: '',
+      street: '',
+      city: '',
+      state: '',
+      phonenumber: '',
+      zip: '',
+      restaurantList: [],
+      person: '',
+      selectedPlace: '',
       error: {},
       masterCheck: false
     }
   },
+  created() {
+    this.getRestaurants()
+  },
   methods: {
+    async getRestaurants(){
+      const requestOptions = {
+        method: 'GET',
+        credentials: 'include',
+      };
+      const res = await fetch(`${process.env.URL}/resturants`, requestOptions);
+      if (res.status === 200) {
+        this.restaurantList = await res.json()
+      }
+    },
     selected(place) {
       this.selectedPlace = place
     },

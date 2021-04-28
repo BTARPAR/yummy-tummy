@@ -76,7 +76,7 @@ export default {
         credentials: 'include'
       };
 
-      const res = await fetch(`${process.env.URL}`, requestOptions);
+      const res = await fetch(`${process.env.URL}/getOrders`, requestOptions);
 
       switch (res.status) {
         case 401:
@@ -93,7 +93,7 @@ export default {
         credentials: 'include'
       };
 
-      const res = await fetch(`${process.env.URL}`, requestOptions);
+      const res = await fetch(`${process.env.URL}/statistics`, requestOptions);
 
       switch (res.status) {
         case 401:
