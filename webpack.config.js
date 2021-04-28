@@ -27,7 +27,7 @@ module.exports = {
     // plugin omitted
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.URL': JSON.stringify('https://fast-badlands-89964.herokuapp.com')
+            URL: JSON.stringify('https://fast-badlands-89964.herokuapp.com')
         })
     ]
 }
