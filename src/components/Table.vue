@@ -6,9 +6,9 @@
               'justify-center': type === 'detail',
               'items-center': type === 'detail',
            }">
-    <div class="self-start ml5" v-if="type === 'detail'">
+    <div class="self-start ml5 ds-ml" v-if="type === 'detail'">
       <button @click="update"
-              class="grow ml6 ba b--transparent no-underline br3 ph4 pv2 white"
+              class="grow ml6 ba b--transparent no-underline br3 ph4 pv2 white ds-ml-6"
               v-bind:class="{
         'bg-gray': !edit,
         'bg-light-blue': edit,
@@ -37,10 +37,10 @@
 
       <tr class="striped--light-silver" v-else>
         <th class="tl pa3"> Quality</th>
-        <th class="tl pa4 pl0 dn-s"> Item</th>
-        <th class="tl pa3 pl0 dn-m"> Price</th>
+        <th class="tl pa4 pl0"> Item</th>
+        <th class="tl pa3 pl0 dn-s" v-if="!edit"> Price</th>
         <th class="tl pa3 pl0 dn-s dn-m"> Food Type</th>
-        <th class="tl pa3 pl0 dn-s"> Spice Level</th>
+        <th class="tl pa3 pl0 dn-s dn-m"> Spice Level</th>
         <th class="tl"></th>
       </tr>
       </thead>
@@ -111,30 +111,30 @@
           class="striped--near-white w-100">
         <td class="flex items-center tl pa3 pl4 pl-3-s">
           <p v-if="!edit">{{ u.quantity }}</p>
-          <input id="name" class=" ba b--black-20 pa2 mb2 db w-20 br3 tc"
+          <input id="name" class=" ba b--black-20 pa2 mb2 db w-20 br3 tc w-60-m"
                  type="number" v-model="u.quantity" v-else
                  aria-describedby="name-desc">
         </td>
 
-        <td class="tl h3 lh-copy dn-s">
+        <td class="tl h3 lh-copy">
           <div class="ttc">
             {{ u.item_name }}
           </div>
         </td>
 
-        <td class="tl h3 lh-copy dn-s">
+        <td class="tl h3 lh-copy" v-if="!edit">
           <div class="">
-            ${{ u.price }}
+            $ {{ Number(u.quantity * u.item_price).toFixed(2) }}
           </div>
         </td>
 
-        <td class="tl h3 lh-copy dn-s">
+        <td class="tl h3 lh-copy dn-s dn-m">
           <div class="ttc">
             {{ u.foodType }}
           </div>
         </td>
 
-        <td class="tl h3 lh-copy dn-s">
+        <td class="tl h3 lh-copy dn-s dn-m">
           <div class="ttc">
             {{ u.spiceLevel }}
           </div>
@@ -166,8 +166,8 @@ export default {
     updateOrder(id) {
       this.$router.push(`/${id}`)
     },
-    remove(index){
-        this.tableData.selected_items.splice(index, 1)
+    remove(index) {
+      this.tableData.selected_items.splice(index, 1)
     },
     update() {
       if (this.edit) {
@@ -176,6 +176,7 @@ export default {
       this.edit = !this.edit
     },
     async updateApi() {
+      this.$emit('callback', 'start')
       const requestOptions = {
         method: 'POST',
         body: JSON.stringify(this.tableData),
@@ -187,7 +188,16 @@ export default {
 
       const id = this.$route.params.id
 
-      await fetch(`${process.env.URL}/getOrder?id=${id}`, requestOptions);
+      const response = await fetch(`${process.env.URL}/getOrder?id=${id}`, requestOptions);
+
+      if (response.status === 200) {
+        const timer = setTimeout(() => {
+          this.$emit('callback', 'success')
+          clearTimeout(timer)
+        }, 2000)
+      } else {
+        this.$emit('callback', 'error')
+      }
 
     }
   }

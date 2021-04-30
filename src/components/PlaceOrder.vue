@@ -1,5 +1,5 @@
 <template>
-  <form class="measure center" @submit.prevent="placeOrder">
+  <form class="measure center ma1 ds-center" @submit.prevent="placeOrder">
     <div class="mb4">
       <p>Our service is to surprise out customer with surprise order feature.</p>
       <p>All you have to do is, give us your delivery address and select restaurant</p>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="w-20">
-          <label class="db fw6 lh-copy f6 tl" for="zip">Postal Code</label>
+          <label class="db fw6 lh-copy f6 tl" for="zip">Zip</label>
           <input class="b pa2 input-reset ba tc w-100"
                  type="text" name="state"
                  id="zip" v-model="zip">
@@ -72,7 +72,7 @@
             <li class="dib ma2 bg-white bg-animate hover-bg-light-gray hide-child br3 relative">
               <a href="#" class="dib nav tc no-underline pa2 ph4 dark-gray ">Select Restaurant</a>
               <ul class="menu list bg-gray mt1 b-yellow pa2 f6 child
-              child-vs o-100-vs absolute-m
+              child-vs o-100-vs absolute
               absolute-l top-100-m w-100 br2 shadow-4 z-1">
                 <li class="ma3 pa2 bg-white bg-animate br3"
                     v-bind:class="{

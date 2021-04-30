@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from "vue-router"
 import Vuex from 'vuex'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faShoppingBasket, faUtensils, faDollarSign, faCamera, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faShoppingBasket, faUtensils, faDollarSign, faCamera, faTimes, faSpinner} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import App from './App.vue'
 import Login from "@/components/Login";
@@ -17,7 +17,8 @@ library.add({
     faUtensils,
     faDollarSign,
     faCamera,
-    faTimes
+    faTimes,
+    faSpinner
 })
 
 Vue.use(VueRouter)

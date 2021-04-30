@@ -46,10 +46,10 @@ export default {
   components: {},
   data() {
     return {
-      email: 'test@test.com',
-      password: 'BHARGAV9228393389',
-      firstname: 'SUNIL',
-      lastname: 'PANCHAL'
+      email: '',
+      password: '',
+      firstname: '',
+      lastname: ''
     }
   },
   methods: {

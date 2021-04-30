@@ -1,19 +1,20 @@
 <template>
   <header id="header" class="courier f3 lh-title pv4">
+    <LoadingScreen :load="loading" :message="error"/>
     <img src="../assets/logo.png" width="100" @click="home" class="pointer">
-    <div> Yummy - Tummy</div>
+    <div class="dn-s"> Yummy - Tummy</div>
 
     <div v-if="this.$route.path !== '/delivery'">
       <button v-if="loggedIn" @click="logOut"
-              class="f5 grow b--none no-underline br3 ph4 pv2 mr4 white bg-black-50 pointer">Log Out
+              class="f5 grow b--none no-underline br3 ph4 pv2 white bg-black-50 pointer">Log Out
       </button>
       <button v-if="!loggedIn" @click="placeOrder"
-              class="f5 grow b--none no-underline br3 ph4 pv2 mr4 white bg-black-50 pointer">
-        Place Order
+              class="f5 grow b--none no-underline br3 ph4 pv2 white bg-black-50 pointer">
+        Order
       </button>
     </div>
     <div v-else>
-      <button @click="loginView" class="f5 grow b--none no-underline br3 ph4 pv2 mr4 white bg-black-50 pointer">
+      <button @click="loginView" class="f5 grow b--none no-underline br3 ph4 pv2 white bg-black-50 pointer">
         Log In
       </button>
     </div>
@@ -22,18 +23,23 @@
 
 <script>
 import '../styles/header.scss'
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default {
   name: 'Header',
-  components: {},
+  components: {LoadingScreen},
   data() {
     return {
-      loggedIn: (this.$route.path !== '/' && this.$route.path !== '/signup')
+      loggedIn: (this.$route.path !== '/' && this.$route.path !== '/signup'),
+      loading: false,
+      error: ''
     }
   },
   methods: {
     home() {
-      this.$router.push('/dashboard')
+      if (this.loggedIn && this.$route.path !== '/delivery' && this.$route.path !== '/dashboard') {
+        this.$router.push('/dashboard')
+      }
     },
     loginView() {
       this.$router.push('/')
@@ -45,15 +51,20 @@ export default {
       this.loggedIn = this.$route.path !== '/' && this.$route.path !== '/signup'
     },
     async logOut() {
-
+      this.loading = true
+      this.error = 'Logging Out....'
       const requestOptions = {
         method: 'POST',
         credentials: 'include'
       };
 
       await fetch(`${process.env.URL}/logOut`, requestOptions);
-      this.$router.push('/')
-
+      const timer = setTimeout(() => {
+        this.loading = false
+        this.error = ''
+        this.$router.push('/')
+        clearTimeout(timer)
+      }, 3000)
     }
   },
   watch: {

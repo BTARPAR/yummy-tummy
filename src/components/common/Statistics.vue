@@ -1,5 +1,5 @@
 <template>
-  <div class="br3 pa2 mr2-l ml2-l mb4 w-60-m w-30-ns bg-white grow">
+  <div class="br3 pa2 mr2-l ml2-l mb4 w-60-m w-30-ns bg-white grow ba">
     <div class="flex items-center tc">
       <div class="w4 w3-s pa-3-s ml4 ml-s pa4 bg-lightest-blue br-100">
         <font-awesome-icon v-bind:icon="icon" size="3x" class="tc white icon-s"/>
