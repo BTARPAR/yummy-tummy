@@ -14,7 +14,7 @@
 
       <InformationBoard
           v-bind:detail-object="customerDetails"
-          title="Customer Details"
+          title="Restaurant Details"
       />
     </div>
 

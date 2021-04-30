@@ -29,7 +29,7 @@
           <font-awesome-icon icon="spinner" spin size="2x" class="icon-s" v-if="clicked"/>
         </div>
 
-        <div class="lh-copy mt3" @click="!clicked && changePath">
+        <div class="lh-copy mt3" @click="changePath" v-if="!clicked">
           <span class="f6 link dim black db">Sign up</span>
         </div>
       </form>

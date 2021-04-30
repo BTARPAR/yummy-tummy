@@ -52,11 +52,8 @@
             'pointer grow hover-bg-lightest-blue': type !== 'detail'
           }"
           @click=" type !== 'detail' && updateOrder(u._id)">
-        <td class="flex items-center tl pa3 pl4 pl-3-s" v-if="type !== 'detail'">
-          <p>#{{ u.order_no }}</p>
-        </td>
 
-        <td class="flex items-center tl pa3 pl4 pl-3-s" v-else>
+        <td class="flex items-center tl pa3 pl4 pl-3-s">
           <p>#{{ u.order_no }}</p>
         </td>
 
@@ -164,7 +161,7 @@ export default {
   props: ['tableData', 'type'],
   methods: {
     updateOrder(id) {
-      this.$router.push(`/${id}`)
+      this.$router.push(`/update/${id}`)
     },
     remove(index) {
       this.tableData.selected_items.splice(index, 1)

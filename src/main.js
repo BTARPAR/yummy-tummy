@@ -42,7 +42,7 @@ const routes = [
     {path: '/signup', component: SignUp, name: 'Sign Up'},
     {path: '/dashboard', component: Dashboard, name: 'Dashboard'},
     {path: '/delivery', component: PlaceOrder, name: 'Place Order'},
-    {path: '/:id', component: UpdateOrder, name: 'UpdateOrder',}
+    {path: '/update/:id', component: UpdateOrder, name: 'UpdateOrder',}
 ]
 const router = new VueRouter({
     routes
