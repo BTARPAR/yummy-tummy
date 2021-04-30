@@ -5,7 +5,8 @@
         <font-awesome-icon v-bind:icon="icon" size="3x" class="tc white icon-s"/>
       </div>
       <div class="flex flex-column justify-center w-50-m w-60">
-        <h4 class="f3">{{count}}</h4>
+        <h4 class="f3" v-if="label === 'Revenue'">$ {{Number(count).toFixed(2)}}</h4>
+        <h4 class="f3" v-else>{{count}}</h4>
         <div class="f3">{{label}}</div>
       </div>
     </div>
