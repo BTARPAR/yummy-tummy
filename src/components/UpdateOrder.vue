@@ -94,9 +94,19 @@ export default {
       } else if (result === 'success') {
         this.error = 'Yay, order update successfully.'
         this.loading = false
+      } else if (result === 'deleted') {
+
+        this.error = "DELETED!! We're sorry to see you go!"
+        const timer = setTimeout(async () => {
+          this.loading = false
+          this.error = ''
+          await this.$router.push('/dashboard')
+          clearTimeout(timer)
+        }, 4000)
+
       } else {
         this.error = 'Something went wrong. Please try again'
-        const timer = setTimeout(()=>{
+        const timer = setTimeout(() => {
           this.loading = false
           this.error = ''
           clearTimeout(timer)

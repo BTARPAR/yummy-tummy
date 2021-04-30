@@ -47,27 +47,19 @@
 
       <tbody class="" v-if="type !== 'detail'">
       <tr v-for="(u, index) in tableData" :key="index"
-          class="striped--near-white"
-          v-bind:class="{
-            'pointer grow hover-bg-lightest-blue': type !== 'detail'
-          }"
+          class="striped--near-white pointer grow hover-bg-lightest-blue"
           @click=" type !== 'detail' && updateOrder(u._id)">
 
         <td class="flex items-center tl pa3 pl4 pl-3-s">
           <p>#{{ u.order_no }}</p>
         </td>
 
-        <td class="tl h3 lh-copy dn-s" v-if="type !== 'detail'">
+        <td class="tl h3 lh-copy dn-s">
           <div class="">
             {{ u.date }}
           </div>
         </td>
 
-        <td class="tl h3 lh-copy dn-s" v-else>
-          <div class="">
-            {{ u.item_name }}
-          </div>
-        </td>
 
         <td class="tl dn-m" v-if="type !== 'detail'">
           <span class="">{{ u.customer_info.name }}</span>
@@ -79,26 +71,14 @@
           </div>
         </td>
 
-        <td class="tl dn-s dn-m" v-if="type !== 'detail'">
+        <td class="tl dn-s dn-m">
           <span class="">{{ u.restaurant_info.name }}</span>
         </td>
 
-        <td class="tl h3 lh-copy dn-s" v-else>
-          <div class="">
-            {{ u.foodType }}
-          </div>
-        </td>
+        <td class="tl dn-s dn-m">{{ u.total }}</td>
 
-        <td class="tl dn-s dn-m" v-if="type !== 'detail'">{{ u.total }}</td>
-
-        <td class="tl h3 lh-copy dn-s" v-else>
-          <div class="">
-            {{ u.spiceLevel }}
-          </div>
-        </td>
-
-        <td class="tl pa3" v-if="type !== 'detail'">
-          <span>Edit</span>
+        <td class="tl pa3">
+          <span class="fw7">Edit</span>
         </td>
       </tr>
       </tbody>
@@ -192,7 +172,9 @@ export default {
           this.$emit('callback', 'success')
           clearTimeout(timer)
         }, 2000)
-      } else {
+      } else if(response.status === 204){
+        this.$emit('callback', 'deleted')
+      }else {
         this.$emit('callback', 'error')
       }
 
