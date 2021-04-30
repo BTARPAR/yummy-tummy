@@ -166,7 +166,6 @@ export default {
       const id = this.$route.params.id
 
       const response = await fetch(`${process.env.URL}/getOrder?id=${id}`, requestOptions);
-      console.log({response})
       if (response.status === 200) {
         const timer = setTimeout(() => {
           this.$emit('callback', 'success')
